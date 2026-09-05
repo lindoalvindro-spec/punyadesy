@@ -1746,10 +1746,10 @@ export default function ScrapbookBook({
                   {/* Track Details */}
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p style={{ fontSize: '0.8rem', fontWeight: '700', margin: '0 0 2px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      Give Me Your Forever
+                      Lagu Spesial Untukmu 🎵
                     </p>
                     <p style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.7)', margin: '0 0 4px 0' }}>
-                      Nadhif Basalama · Special for Desy 🤍
+                      Our Favorite Song · Special for Desy 🤍
                     </p>
 
                     <div style={{ display: 'flex', alignItems: 'flex-end', gap: '2px', height: '12px' }}>

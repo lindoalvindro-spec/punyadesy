@@ -48,8 +48,9 @@ export default function App() {
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
       >
-        <source src="/ssstik.io_@arissalsa.akunbarengan_1786175843095.mp4" />
-        <source src="/Give Me Your Forever_spotdown.org.mp3" type="audio/mp3" />
+        <source src="/special-song.mp3" type="audio/mpeg" />
+        <source src="/WhatsApp Audio 2026-09-05 at 17.10.01.mpeg" type="audio/mpeg" />
+        <source src="/WhatsApp%20Audio%202026-09-05%20at%2017.10.01.mpeg" type="audio/mpeg" />
       </audio>
 
       {/* 1. Passcode Screen (PIN: 111225) */}
