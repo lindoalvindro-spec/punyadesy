@@ -198,11 +198,11 @@ export default function ScrapbookBook({
   const pageNames = [
     { id: 0, label: 'Sampul', icon: '🎀' },
     { id: 1, label: 'Kenalan', icon: '🌸' },
-    { id: 2, label: 'First Date', icon: '🍜' },
+    { id: 2, label: 'Memori', icon: '🌸' },
     { id: 3, label: '5 Potret', icon: '📸' },
     { id: 4, label: 'Lagu Kita', icon: '🎵' },
     { id: 5, label: 'Surat Cinta', icon: '💌' },
-    { id: 6, label: 'Tiup Lilin', icon: '🎂' },
+    { id: 6, label: 'Harapan', icon: '✨' },
   ];
 
   // The 5 Special Photos with their exact quotes requested by user
@@ -833,7 +833,7 @@ export default function ScrapbookBook({
                     marginBottom: '6px',
                   }}
                 >
-                  SPECIAL BIRTHDAY SCRAPBOOK
+                  SPECIAL MEMORY SCRAPBOOK
                 </p>
 
                 <h1
@@ -2271,8 +2271,8 @@ export default function ScrapbookBook({
                   marginBottom: '8px',
                 }}
               >
-                <Cake size={17} />
-                <span>Tiup Lilin Ulang Tahun 🎂 💕</span>
+                <Sparkles size={17} />
+                <span>Tiup Lilin & Sampaikan Harapan ✨ 🤍</span>
               </button>
 
               {/* Restart Button */}
@@ -2579,7 +2579,7 @@ export default function ScrapbookBook({
               MAKE A WISH
             </span>
             <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.35rem', color: '#2e1c24', margin: '4px 0 12px 0' }}>
-              Ulang Tahun Desy 🎂
+              Harapan Untuk Desy ✨
             </h3>
 
             {/* Cake Graphic */}
@@ -2672,24 +2672,30 @@ export default function ScrapbookBook({
                 </button>
               </>
             ) : (
-              <div>
-                <p style={{ fontFamily: 'var(--font-handwriting)', fontSize: '1.3rem', color: '#c9184a', fontWeight: '700', marginBottom: '6px' }}>
-                  Yaaay! Selamat Ulang Tahun Desy Eirlea Driselle! 🎉✨
-                </p>
-                <p style={{ fontSize: '0.78rem', color: '#66424e', marginBottom: '14px' }}>
+              <div style={{ padding: '4px 6px' }}>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-handwriting)',
+                    fontSize: '1.3rem',
+                    color: '#381e28',
+                    lineHeight: '1.6',
+                    margin: '4px 0 18px 0',
+                  }}
+                >
                   Semoga semua doa dan harapan manismu terkabul, selalu bahagia, sehat, dan terus tersenyum bersama orang-orang tersayang! 💕
                 </p>
                 <button
                   onClick={() => setShowCakeModal(false)}
                   style={{
-                    background: '#fce7f3',
-                    color: '#c9184a',
-                    border: '1.5px solid #ff758f',
-                    borderRadius: '18px',
-                    padding: '7px 18px',
-                    fontSize: '0.82rem',
+                    background: 'linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%)',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '24px',
+                    padding: '9px 24px',
+                    fontSize: '0.86rem',
                     fontWeight: '700',
                     cursor: 'pointer',
+                    boxShadow: '0 4px 14px rgba(255, 77, 109, 0.35)',
                   }}
                 >
                   Tutup & Simpan Kenangan 🌸
