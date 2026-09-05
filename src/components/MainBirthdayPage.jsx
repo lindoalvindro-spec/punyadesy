@@ -17,7 +17,7 @@ function LetterTypewriter() {
   const [displayedLines, setDisplayedLines] = useState([]);
 
   const letterLines = [
-    { text: "Happy Birthday, Lucyna ❤️", style: "greeting" },
+    { text: "Happy Birthday, Desy ❤️", style: "greeting" },
     { text: "", style: "spacer" },
     { text: "On this special day, I want to wish you good health, genuine happiness, peace of mind, and the fulfilment of every dream and ambition you pursue.", style: "body" },
     { text: "", style: "spacer" },
@@ -186,7 +186,7 @@ function LetterTypewriter() {
             }}
           >
             <span style={{ color: '#60a5fa', fontSize: '0.85rem' }}>With all my love,</span><br />
-            <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: '#38bdf8', textShadow: '0 0 10px rgba(56,189,248,0.5)' }}>Haikal</span>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: '#38bdf8', textShadow: '0 0 10px rgba(56,189,248,0.5)' }}>🤍</span>
           </div>
         )}
       </div>
@@ -313,7 +313,7 @@ function FarewellSection({ onOpenCake }) {
           fontWeight: '400',
         }}
       >
-        Happy Birthday, Lucyna Majewska ❤️<br /><br />
+        Happy Birthday, Desy Eirlea Driselle ❤️<br /><br />
         May your year ahead be filled with genuine happiness, good health, and success in everything you do. I’m truly grateful to be able to celebrate you today, even though we’re miles apart. Distance may keep us from celebrating side by side, but it could never make this day feel any less special to me
       </p>
 
@@ -550,15 +550,15 @@ export default function MainBirthdayPage() {
     }
   };
 
-  // 3. Polaroid Lightbox Modal State - Photos for Lucyna Majewska
+  // 3. Polaroid Lightbox Modal State - Photos for Desy Eirlea Driselle
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const photoGallery = [
     { 
       id: 1, 
-      title: 'Lucyna Majewska ✨', 
+      title: 'Desy Eirlea Driselle ✨', 
       date: 'Special Celebration', 
       location: 'Cherished Moment',
-      img: '/lucyna 1.jpeg',
+      img: '/luc 1.jpeg',
       rotation: '-2deg'
     },
     { 
@@ -566,7 +566,7 @@ export default function MainBirthdayPage() {
       title: 'Forever in my heart 🌍', 
       date: 'Miles Apart, But Our Hearts Close 💕', 
       location: '',
-      img: '/lucyna 2.jpeg',
+      img: '/luc 2.jpeg',
       rotation: '2.5deg'
     },
   ];
@@ -918,7 +918,7 @@ export default function MainBirthdayPage() {
           <span>🤍</span>
         </div>
 
-        {/* Title: Happy Birthday, My Dearest 🤍 Lucyna Majewska */}
+        {/* Title: Happy Birthday, My Dearest 🤍 Desy Eirlea Driselle */}
         <div
           style={{
             fontFamily: 'var(--font-display)',
@@ -954,7 +954,7 @@ export default function MainBirthdayPage() {
               letterSpacing: '0.5px',
             }}
           >
-            Moje Kochanie ❤️
+            Sayang 🤍
           </div>
           <div
             ref={agaaRef}
@@ -966,7 +966,7 @@ export default function MainBirthdayPage() {
               textShadow: '0 0 20px rgba(255, 255, 255, 0.6)',
             }}
           >
-            Lucyna Majewska
+            Desy Eirlea Driselle
           </div>
         </div>
 
@@ -1614,7 +1614,7 @@ export default function MainBirthdayPage() {
                 zIndex: 5,
               }}
             >
-              📜 A SPECIAL NOTE FOR LUCYNA MAJEWSKA 💙
+              📜 A SPECIAL NOTE FOR DESY EIRLEA DRISELLE 💙
             </div>
 
             <p style={{ marginTop: '4px', fontFamily: 'var(--font-body)' }}>
@@ -1746,10 +1746,10 @@ export default function MainBirthdayPage() {
           >
             <div style={{ fontSize: '3rem', marginBottom: '10px' }}>💖</div>
             <h3 className="neon-text" style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', marginBottom: '8px' }}>
-              Happy Birthday, Lucyna!
+              Happy Birthday, Desy!
             </h3>
             <p style={{ fontSize: '0.9rem', color: '#e0f2fe', marginBottom: '20px' }}>
-              Wishing the wonderful Lucyna Majewska a magical year ahead 💗
+              Wishing the wonderful Desy Eirlea Driselle a magical year ahead 💗
             </p>
 
             <button

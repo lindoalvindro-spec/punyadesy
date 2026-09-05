@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { Heart, Delete, X, Sparkles, KeyRound } from 'lucide-react';
+import { Heart, Delete, X, Sparkles, Lock } from 'lucide-react';
 
 export default function PasscodeScreen({ onUnlock }) {
   const containerRef = useRef(null);
@@ -9,29 +9,28 @@ export default function PasscodeScreen({ onUnlock }) {
   const titleRef = useRef(null);
   const dotsRef = useRef(null);
   const keypadRef = useRef(null);
-  const hintRef = useRef(null);
   const iconRingRef = useRef(null);
   
   const [pin, setPin] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [sparks, setSparks] = useState([]);
   
-  const CORRECT_PIN = '190826';
+  const CORRECT_PIN = '111225';
   const PIN_LENGTH = 6;
 
-  const bgParticles = Array.from({ length: 14 }).map((_, i) => ({
+  const bgParticles = Array.from({ length: 16 }).map((_, i) => ({
     id: i,
     left: `${Math.random() * 92}%`,
-    size: Math.random() * 12 + 10,
+    size: Math.random() * 14 + 10,
     duration: Math.random() * 6 + 5,
     delay: Math.random() * 4,
+    symbol: i % 3 === 0 ? '🌸' : i % 3 === 1 ? '✨' : '💖',
   }));
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'back.out(1.5)', duration: 0.7 } });
     
     tl.fromTo(cardRef.current, 
-      { opacity: 0, scale: 0.85, y: 25 },
+      { opacity: 0, scale: 0.88, y: 25 },
       { opacity: 1, scale: 1, y: 0 }
     )
     .fromTo(titleRef.current,
@@ -44,7 +43,7 @@ export default function PasscodeScreen({ onUnlock }) {
       { opacity: 1, scale: 1, duration: 0.35 },
       '-=0.25'
     )
-    .fromTo('.keypad-btn-fancy',
+    .fromTo('.keypad-btn-pink',
       { opacity: 0, scale: 0.5, y: 15 },
       { opacity: 1, scale: 1, y: 0, stagger: 0.03, duration: 0.4 },
       '-=0.2'
@@ -52,29 +51,13 @@ export default function PasscodeScreen({ onUnlock }) {
 
     gsap.to(iconRingRef.current, {
       rotation: 360,
-      duration: 10,
+      duration: 12,
       repeat: -1,
       ease: 'none',
     });
   }, { scope: containerRef });
 
-  const spawnSparkleEffect = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const newSpark = {
-      id: Date.now() + Math.random(),
-      x,
-      y,
-    };
-    
-    setSparks((prev) => [...prev.slice(-8), newSpark]);
-  };
-
   const handleKeyPress = (e, num) => {
-    spawnSparkleEffect(e);
-
     if (pin.length < PIN_LENGTH) {
       const newPin = pin + num;
       setPin(newPin);
@@ -82,14 +65,14 @@ export default function PasscodeScreen({ onUnlock }) {
 
       const btn = e.currentTarget;
       gsap.timeline()
-        .to(btn, { scale: 0.88, boxShadow: '0 0 25px #00d2ff, inset 0 0 15px #ffffff', duration: 0.1 })
-        .to(btn, { scale: 1, boxShadow: '0 0 15px rgba(0, 210, 255, 0.35)', duration: 0.25, ease: 'back.out(2)' });
+        .to(btn, { scale: 0.88, backgroundColor: '#ffe4ea', duration: 0.1 })
+        .to(btn, { scale: 1, backgroundColor: '#ffffff', duration: 0.25, ease: 'back.out(2)' });
 
       const targetDot = dotsRef.current?.children[pin.length];
       if (targetDot) {
         gsap.fromTo(targetDot,
-          { scale: 0.6, rotate: -30 },
-          { scale: 1.25, rotate: 0, duration: 0.2, yoyo: true, repeat: 1 }
+          { scale: 0.6, rotate: -20 },
+          { scale: 1.3, rotate: 0, duration: 0.2, yoyo: true, repeat: 1 }
         );
       }
 
@@ -99,32 +82,30 @@ export default function PasscodeScreen({ onUnlock }) {
     }
   };
 
-  const handleDelete = (e) => {
-    spawnSparkleEffect(e);
+  const handleDelete = () => {
     if (pin.length > 0) {
       setPin(pin.slice(0, -1));
       setErrorMsg('');
     }
   };
 
-  const handleClear = (e) => {
-    spawnSparkleEffect(e);
+  const handleClear = () => {
     setPin('');
     setErrorMsg('');
   };
 
   const verifyPin = (enteredPin) => {
-    if (enteredPin === CORRECT_PIN || enteredPin === '190826' || enteredPin === '1908' || enteredPin === '1308' || enteredPin === '1234') {
+    if (enteredPin === CORRECT_PIN || enteredPin === '111225' || enteredPin === '1112' || enteredPin === '1234') {
       const tl = gsap.timeline();
       
       tl.to(dotsRef.current, {
-        scale: 1.2,
-        filter: 'drop-shadow(0 0 25px #38bdf8) drop-shadow(0 0 35px #00d2ff)',
+        scale: 1.15,
+        filter: 'drop-shadow(0 0 15px #ff758f)',
         duration: 0.3,
       })
       .to(cardRef.current, {
-        scale: 1.04,
-        boxShadow: '0 0 50px #00d2ff, 0 0 80px #38bdf8',
+        scale: 1.03,
+        boxShadow: '0 20px 50px rgba(255, 117, 143, 0.4)',
         duration: 0.3,
       })
       .to(containerRef.current, {
@@ -137,7 +118,7 @@ export default function PasscodeScreen({ onUnlock }) {
         }
       });
     } else {
-      setErrorMsg('Incorrect passcode. Please try again 🤍');
+      setErrorMsg('Kode sandi belum tepat, coba lagi ya sayang 🤍');
       
       gsap.to(dotsRef.current, {
         x: [-12, 12, -8, 8, -4, 4, 0],
@@ -146,8 +127,8 @@ export default function PasscodeScreen({ onUnlock }) {
       });
       
       gsap.fromTo(cardRef.current,
-        { border: '1px solid #ff2a2a', boxShadow: '0 0 30px rgba(255, 42, 42, 0.6)' },
-        { border: '1.5px solid rgba(96, 165, 250, 0.45)', boxShadow: '0 20px 40px rgba(0, 0, 0, 0.8)', duration: 0.8 }
+        { border: '1.5px solid #ff4d6d', boxShadow: '0 0 25px rgba(255, 77, 109, 0.35)' },
+        { border: '1.5px solid rgba(255, 182, 193, 0.7)', boxShadow: '0 16px 40px rgba(255, 143, 163, 0.2)', duration: 0.8 }
       );
       
       setTimeout(() => {
@@ -163,19 +144,19 @@ export default function PasscodeScreen({ onUnlock }) {
         position: 'absolute',
         inset: 0,
         zIndex: 100,
-        background: 'radial-gradient(circle at 50% 40%, #0a1e3f 0%, #041026 65%, #010610 100%)',
+        background: 'radial-gradient(circle at 50% 35%, #fffbfd 0%, #fff0f5 55%, #fce7f3 100%)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '16px 12px',
+        padding: '16px 14px',
         overflowY: 'auto',
         overflowX: 'hidden',
         width: '100%',
         height: '100%',
       }}
     >
-      {/* Background Floating Neon Petals */}
+      {/* Background Floating Petals & Hearts */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden' }}>
         {bgParticles.map((p) => (
           <div
@@ -185,43 +166,42 @@ export default function PasscodeScreen({ onUnlock }) {
               left: p.left,
               bottom: '-20px',
               fontSize: `${p.size}px`,
-              opacity: 0.4,
-              filter: 'drop-shadow(0 0 6px #00d2ff)',
-              animation: `floatUp ${p.duration}s linear infinite`,
+              opacity: 0.5,
+              animation: `floatPetal ${p.duration}s linear infinite`,
               animationDelay: `${p.delay}s`,
             }}
           >
-            {p.id % 2 === 0 ? '💙' : '✨'}
+            {p.symbol}
           </div>
         ))}
       </div>
 
-      {/* Glowing Backdrop Aura */}
+      {/* Gentle Pink Backdrop Aura */}
       <div
         style={{
           position: 'absolute',
-          width: '260px',
-          height: '260px',
+          width: '280px',
+          height: '280px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(0, 210, 255, 0.35) 0%, rgba(0, 102, 255, 0) 70%)',
-          filter: 'blur(30px)',
+          background: 'radial-gradient(circle, rgba(255, 182, 193, 0.45) 0%, transparent 70%)',
+          filter: 'blur(35px)',
           pointerEvents: 'none',
         }}
       />
 
-      {/* Main Upgraded Passcode Card - Perfectly Fitted */}
+      {/* Main White-Pink Passcode Card */}
       <div
         ref={cardRef}
         style={{
           width: '100%',
-          maxWidth: '320px',
-          background: 'linear-gradient(165deg, rgba(10, 30, 63, 0.85) 0%, rgba(4, 16, 38, 0.9) 100%)',
+          maxWidth: '330px',
+          background: 'rgba(255, 255, 255, 0.92)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderRadius: '28px',
-          border: '1.5px solid rgba(96, 165, 250, 0.45)',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 210, 255, 0.25), inset 0 0 15px rgba(96, 165, 250, 0.15)',
-          padding: '20px 16px 16px',
+          borderRadius: '32px',
+          border: '1.5px solid rgba(255, 182, 193, 0.7)',
+          boxShadow: '0 20px 45px rgba(255, 143, 163, 0.22), 0 4px 15px rgba(0,0,0,0.03)',
+          padding: '24px 18px 20px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -229,20 +209,20 @@ export default function PasscodeScreen({ onUnlock }) {
           margin: 'auto 0',
         }}
       >
-        {/* Decorative Corner Glowing Sparkles */}
-        <div style={{ position: 'absolute', top: '12px', left: '14px', opacity: 0.8 }}>
-          <Sparkles size={14} color="#38bdf8" style={{ filter: 'drop-shadow(0 0 6px #38bdf8)' }} />
+        {/* Decorative Sparkles */}
+        <div style={{ position: 'absolute', top: '16px', left: '18px', opacity: 0.75 }}>
+          <Sparkles size={16} color="#ff758f" />
         </div>
-        <div style={{ position: 'absolute', top: '12px', right: '14px', opacity: 0.8 }}>
-          <Sparkles size={14} color="#60a5fa" style={{ filter: 'drop-shadow(0 0 6px #00d2ff)' }} />
+        <div style={{ position: 'absolute', top: '16px', right: '18px', opacity: 0.75 }}>
+          <Sparkles size={16} color="#ff758f" />
         </div>
 
-        {/* Top Animated Icon Container with Rotating Orbit Ring */}
+        {/* Top Animated Icon Container */}
         <div
           style={{
             position: 'relative',
-            width: '56px',
-            height: '56px',
+            width: '60px',
+            height: '60px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -256,77 +236,79 @@ export default function PasscodeScreen({ onUnlock }) {
               position: 'absolute',
               inset: 0,
               borderRadius: '50%',
-              border: '1.5px dashed rgba(56, 189, 248, 0.65)',
-              boxShadow: '0 0 10px rgba(0, 210, 255, 0.4)',
+              border: '1.5px dashed rgba(255, 117, 143, 0.5)',
             }}
           />
 
-          {/* Glowing Center Badge */}
+          {/* Soft Pink Glowing Center Badge */}
           <div
             style={{
-              width: '44px',
-              height: '44px',
+              width: '46px',
+              height: '46px',
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, #00d2ff 0%, #0066ff 100%)',
+              background: 'linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 16px #00d2ff, inset 0 0 8px rgba(255,255,255,0.5)',
+              boxShadow: '0 8px 20px rgba(255, 77, 109, 0.35)',
             }}
           >
-            <KeyRound size={20} color="#ffffff" style={{ filter: 'drop-shadow(0 0 6px #ffffff)' }} />
+            <Lock size={20} color="#ffffff" />
           </div>
         </div>
 
         {/* Title Header */}
-        <div ref={titleRef} style={{ textAlign: 'center', marginBottom: '16px' }}>
+        <div ref={titleRef} style={{ textAlign: 'center', marginBottom: '18px' }}>
           <h2
-            className="neon-text"
             style={{
-              fontSize: '1.35rem',
+              fontSize: '1.45rem',
               fontWeight: '700',
               fontFamily: 'var(--font-display)',
-              marginBottom: '2px',
-              letterSpacing: '0.5px',
+              color: '#33222a',
+              marginBottom: '3px',
+              letterSpacing: '0.3px',
             }}
           >
-            For You, Lucyna
+            For You, Desy 🤍
           </h2>
           <p
-            className="neon-text-subtle"
             style={{
-              fontSize: '0.8rem',
-              color: '#e0f2fe',
-              opacity: 0.9,
+              fontSize: '0.85rem',
+              color: '#806b74',
+              fontFamily: 'var(--font-body)',
             }}
           >
             Enter our secret passcode
           </p>
           <p
             style={{
-              fontSize: '0.72rem',
-              color: '#38bdf8',
-              opacity: 0.85,
-              fontStyle: 'italic',
-              marginTop: '4px',
+              fontSize: '0.78rem',
+              color: '#ff4d6d',
+              fontWeight: '600',
+              fontFamily: 'var(--font-body)',
+              marginTop: '5px',
+              background: '#fff0f3',
+              padding: '3px 12px',
+              borderRadius: '12px',
+              display: 'inline-block',
             }}
           >
-            Clue: 190826 ❤️
+            Clue: 111225 ❤️
           </p>
         </div>
 
-        {/* Upgraded 6-PIN Dots Container */}
+        {/* 6-PIN Dots Container */}
         <div
           ref={dotsRef}
           style={{
             display: 'flex',
-            gap: '10px',
-            marginBottom: '18px',
-            padding: '8px 16px',
-            background: 'rgba(2, 8, 20, 0.65)',
-            borderRadius: '20px',
-            border: '1px solid rgba(96, 165, 250, 0.3)',
-            boxShadow: 'inset 0 0 8px rgba(0,0,0,0.5), 0 0 12px rgba(0,210,255,0.15)',
+            gap: '12px',
+            marginBottom: '20px',
+            padding: '10px 18px',
+            background: '#fff5f7',
+            borderRadius: '24px',
+            border: '1px solid rgba(255, 182, 193, 0.5)',
+            boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.03)',
           }}
         >
           {Array.from({ length: 6 }).map((_, idx) => {
@@ -335,16 +317,15 @@ export default function PasscodeScreen({ onUnlock }) {
               <div
                 key={idx}
                 style={{
-                  position: 'relative',
                   width: '14px',
                   height: '14px',
                   borderRadius: '50%',
-                  border: isFilled ? '1.5px solid #ffffff' : '1.5px solid rgba(96, 165, 250, 0.5)',
+                  border: isFilled ? '1.5px solid #ff4d6d' : '1.5px solid #ffccd5',
                   background: isFilled
-                    ? 'radial-gradient(circle at 35% 35%, #38bdf8 0%, #00d2ff 60%, #0052cc 100%)'
-                    : 'transparent',
+                    ? 'linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%)'
+                    : '#ffffff',
                   boxShadow: isFilled
-                    ? '0 0 10px #00d2ff, 0 0 16px #38bdf8, inset 0 0 5px #ffffff'
+                    ? '0 0 10px rgba(255, 77, 109, 0.5)'
                     : 'none',
                   transition: 'all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                 }}
@@ -358,43 +339,40 @@ export default function PasscodeScreen({ onUnlock }) {
           <p
             style={{
               fontSize: '0.78rem',
-              color: '#38bdf8',
+              color: '#e11d48',
               marginBottom: '10px',
-              textShadow: '0 0 8px rgba(0, 210, 255, 0.8)',
               textAlign: 'center',
-              fontWeight: '500',
+              fontWeight: '600',
             }}
           >
             {errorMsg}
           </p>
         )}
 
-        {/* Keypad Grid 3x4 Fitted for Mobile Screen */}
+        {/* Keypad Grid 3x4 */}
         <div
           ref={keypadRef}
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '10px',
+            gap: '12px',
             width: '100%',
-            maxWidth: '240px',
-            marginBottom: '16px',
+            maxWidth: '245px',
+            marginBottom: '10px',
           }}
         >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
               key={num}
-              id={`btn-${num}`}
-              className="keypad-btn-fancy"
+              className="keypad-btn-pink"
               onClick={(e) => handleKeyPress(e, num.toString())}
               style={{
-                position: 'relative',
                 width: '56px',
                 height: '56px',
                 borderRadius: '50%',
-                background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 210, 255, 0.05) 100%)',
-                border: '1px solid rgba(96, 165, 250, 0.35)',
-                color: '#ffffff',
+                background: '#ffffff',
+                border: '1.5px solid rgba(255, 182, 193, 0.6)',
+                color: '#33222a',
                 fontSize: '1.35rem',
                 fontWeight: '600',
                 fontFamily: 'var(--font-body)',
@@ -403,9 +381,8 @@ export default function PasscodeScreen({ onUnlock }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.4), inset 0 0 8px rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(8px)',
-                transition: 'all 0.2s ease',
+                boxShadow: '0 4px 10px rgba(255, 182, 193, 0.25)',
+                transition: 'all 0.15s ease',
               }}
             >
               {num}
@@ -414,23 +391,21 @@ export default function PasscodeScreen({ onUnlock }) {
 
           {/* Clear Button */}
           <button
-            className="keypad-btn-fancy"
-            onClick={(e) => handleClear(e)}
+            className="keypad-btn-pink"
+            onClick={handleClear}
             style={{
-              position: 'relative',
               width: '56px',
               height: '56px',
               borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(96, 165, 250, 0.2)',
-              color: 'var(--text-muted)',
+              background: '#fff5f7',
+              border: '1px solid rgba(255, 182, 193, 0.4)',
+              color: '#806b74',
               fontSize: '1rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto',
-              backdropFilter: 'blur(8px)',
             }}
           >
             <X size={18} />
@@ -438,17 +413,15 @@ export default function PasscodeScreen({ onUnlock }) {
 
           {/* 0 Button */}
           <button
-            id="btn-0"
-            className="keypad-btn-fancy"
+            className="keypad-btn-pink"
             onClick={(e) => handleKeyPress(e, '0')}
             style={{
-              position: 'relative',
               width: '56px',
               height: '56px',
               borderRadius: '50%',
-              background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 210, 255, 0.05) 100%)',
-              border: '1px solid rgba(96, 165, 250, 0.35)',
-              color: '#ffffff',
+              background: '#ffffff',
+              border: '1.5px solid rgba(255, 182, 193, 0.6)',
+              color: '#33222a',
               fontSize: '1.35rem',
               fontWeight: '600',
               fontFamily: 'var(--font-body)',
@@ -457,8 +430,7 @@ export default function PasscodeScreen({ onUnlock }) {
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.4), inset 0 0 8px rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(8px)',
+              boxShadow: '0 4px 10px rgba(255, 182, 193, 0.25)',
             }}
           >
             0
@@ -466,31 +438,27 @@ export default function PasscodeScreen({ onUnlock }) {
 
           {/* Backspace Delete Button */}
           <button
-            className="keypad-btn-fancy"
-            onClick={(e) => handleDelete(e)}
+            className="keypad-btn-pink"
+            onClick={handleDelete}
             style={{
-              position: 'relative',
               width: '56px',
               height: '56px',
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, rgba(0, 210, 255, 0.2) 0%, rgba(0, 102, 255, 0.1) 100%)',
-              border: '1px solid rgba(0, 210, 255, 0.4)',
-              color: 'var(--neon-pink-light)',
+              background: '#fff0f3',
+              border: '1px solid rgba(255, 117, 143, 0.4)',
+              color: '#ff4d6d',
               fontSize: '1rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               margin: '0 auto',
-              boxShadow: '0 0 12px rgba(0, 210, 255, 0.2)',
-              backdropFilter: 'blur(8px)',
+              boxShadow: '0 2px 8px rgba(255, 77, 109, 0.15)',
             }}
           >
             <Delete size={18} />
           </button>
         </div>
-
-
       </div>
     </div>
   );

@@ -164,7 +164,7 @@ export default function GinghamBirthdayCard() {
           Interactive Gift Card 🎁
         </h3>
         <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-          Tap the card to open Lucyna's birthday surprise ✨
+          Tap the card to open Desy's birthday surprise ✨
         </p>
       </div>
 
@@ -224,12 +224,12 @@ export default function GinghamBirthdayCard() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <Sparkles size={18} color="#b4001e" />
                 <span style={{ fontSize: '0.82rem', fontWeight: '700', letterSpacing: '1px', color: '#b4001e' }}>
-                  A SPECIAL MESSAGE FOR LUCYNA MAJEWSKA
+                  A SPECIAL MESSAGE FOR DESY EIRLEA DRISELLE
                 </span>
               </div>
 
               <h4 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', color: '#73000b', marginBottom: '8px' }}>
-                Happy Birthday, Moje Kochanie! 🎂✨
+                Happy Birthday, Sayang! 🎂✨
               </h4>
 
               <p style={{ fontSize: '0.85rem', lineHeight: '1.55', color: '#590008', fontWeight: '500' }}>
@@ -331,8 +331,8 @@ export default function GinghamBirthdayCard() {
                 }}
               >
                 <img
-                  src="/lucyna 1.jpeg"
-                  alt="Lucyna Majewska"
+                  src="/luc 1.jpeg"
+                  alt="Desy Eirlea Driselle"
                   style={{
                     width: '100%',
                     height: '100%',
