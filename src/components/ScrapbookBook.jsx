@@ -1679,7 +1679,7 @@ export default function ScrapbookBook({
                     margin: 0,
                   }}
                 >
-                  kamu jugo keknyo sudah tau, kalo satu lagu ini biso bkin aku keinget kamu, karno aku bener" naro kamu di lagu ini 🎵
+                  Kamu juga sepertinya sudah tahu, kalau lagu ini selalu bisa membuatku teringat kamu, karena aku benar-benar menaruh kamu di lagu ini 🎵
                 </p>
               </div>
 
